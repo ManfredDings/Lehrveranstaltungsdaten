@@ -1,0 +1,476 @@
+object MainForm: TMainForm
+  Left = 441
+  Height = 516
+  Top = 147
+  Width = 557
+  Caption = 'Veranstaltungsdaten'
+  ClientHeight = 516
+  ClientWidth = 557
+  Constraints.MaxHeight = 516
+  Constraints.MaxWidth = 557
+  Constraints.MinHeight = 516
+  Constraints.MinWidth = 557
+  Icon.Data = {
+    900B000000000100010000000000010020007A0B00001600000089504E470D0A
+    1A0A0000000D4948445200000100000001000802000000D3103F3100000B4149
+    444154789CED9BD772DBC81645E723EEF3FD96FB763FCBE31CE5280739E720E7
+    28E728675BCE72CE590E1A67C989B38BA784C20024C8AA113963EEB56A978B6E
+    824013DDEBA001DABF95008CF9ED9FEE00C03F090280350800D6200058830060
+    0D0280350800D62000588300600D0280350800D62000588300600D0280350800
+    D62000588300600D0280350800D62000588300600D0280350800D6D410E03FFF
+    27E4D70B0210EB2000B10E0210EB2000B10E0210EB2000B10E0210EB2000B10E
+    0210EB0C9B0000AD0D0280350800D62000588300600D0280350800D620005883
+    00600D0280350800D62000588300600D0280350800D62000588300600D028035
+    FC9748D2824100621D0420D64100621D0420D64100621D0420D64100621D0420
+    D64100629D611300A0B54100B00601C01A04006B1000AC4100B00601C01A0400
+    6B1000AC4100B00601C01A04006B1000AC4100B00601C01A04006B1000ACE17F
+    8491160C0210EB2000B10E0210EB2000B10E0210EB2000B10E0210EB2000B10E
+    0210EB0C9B0000AD0D0280350800D62000588300600D0280350800D620005883
+    00600D0280350800D62000588300600D0280350800D62000588300600D028035
+    0800D6F07F82490B060188751080580701887510805807018875108058070188
+    7510805807018875864D0080D60601C01A04006B1000AC4100B00601C01A0400
+    6B1000AC4100B00601C09ABA05F8EFFF08F9F706018875108058070188751080
+    58070188751A2E00402B8200600D0280350800D62000588300600D028035FC0E
+    405A220840AC8300C43A0840AC8300C43A0840ACD37001005A1104006B1000AC
+    4100B00601C01A04006B780C4A5A220840AC8300C43A0840AC8300C43A0840AC
+    D37001005A1104006B1000AC4100B00601C01A04006B1000ACE17700D2124100
+    621D0420D64100621D0420D64100629D860B00D08A2000588300600D02803508
+    00D6200058C36350D2124100621D0420D64100621D0420D64100629D860B00D0
+    8A2000588300600D0280350800D6200058C36350D2124100621D0420D6410062
+    1D0420D64100629D860B00D08A2000588300600D0280350800D6200058830060
+    0D0280350800D62000588300600D0280350800D62000588300600D0280350800
+    D62000588300600D0280354D12E0CB972F8F1E3DEAEBEBCBB4FFF8F1E3F1E3C7
+    2F5EBCA8F6C1F7EFDFFF91A2F828DAFFBB77EF6A76E6D3A74F0F1E3C78FBF66D
+    CD2DB54375A0627B3D1F17DFBE7D7BF9F2E5BD7BF7F2FBD14ED4DEDFDF5FF183
+    9F3F7F5627DFBC7953B0F3D7AF5F6B0F1F3E7CA8D6F93A3BF9FDFBF76A9D7CF5
+    EA95DAABED479D7CF8F0A1BA51F15DED2D3FE279FEF82BF5747818698600FBF7
+    EFFF7D88F9F3E7270376ECD831B58C1C39527FCE9C39F3F9F3E7F9CFCE9A35EB
+    F7143D3D3DD58E72F8F0616D3067CE9CE2CE6CD9B22539E8C2850B0BB63C75EA
+    94B6696B6BCBB45FBD7A353A537C2071F6ECD9091326249DD77449F6307DFAF4
+    A4FDEEDDBB990F6EDBB62D79579D5499C86CA0B9B564C992649BCD9B376736E8
+    EDEDADB393E7CE9D9B387162B2AB8F1F3F267B98316346D27EEBD6AD824E2E58
+    B040AAA7DFD5978DEF7EE3C68D82A36BB7E9F11D3F7E7CCD0E0F2FCD1060D4A8
+    51CF9E3DD30B4DF1B163C7EED8B123DAC78D1BA7FAA117AA823AD76BD6ACC97F
+    56027475757D1CA2DA2154A2468C18A1D3A7ED8B3BB36FDFBEA8733AB4CEB866
+    79C5CD62FCA64D9B3679F2E47C9766CF9E5D736EE98AA76D4E9E3C197F4D2ABD
+    BAAA9370F0E0C19F3F7F96CA5339FFD9BD7BF746BB76A2EF75E2C489CC06EABC
+    26AE2A77A9AC990E94B98AAA87AA05353BA9CBAFB649F69F547A55628DCE8103
+    07C2BD8A17993D7BF64427B5130D71777777FADD9D3B77860012A9A003214032
+    BE5A29147778D869F63DC0FAF5EB55BAF2ED3A9B7220DFAED9A6D95073B71B37
+    6ED4B5654699FA3BD3DEDEBE7BF7EE8A6F69FCA64E9DAAC2A6514CB71F397244
+    03A6C3D59C5BDAA6B3B333DFAE6FBA78F1E2FA3BA979BC6BD7AE820D3459D599
+    9B376F262D71698D6B5DF1CE376DDAB46EDDBA7CBBCA44F1E5314347474752D7
+    4A435EDDBF7F5F7F5EB972A5E0832140FD071A769A2D80A6E9D6AD5BF3ED2AFF
+    2B57AECCB74B000DBF56A8838383D5F679FBF66D9D445D82355754B3EBEC8966
+    4CC52B7B6968FC743BB16CD93215C2A45D555CED5A9AEB2BD41C36F973FCF871
+    55B5A74F9FA6AF5D924AD7B4818101B5572CFF69627E14AF2254A77599D28D4D
+    FC553E8C1E3D5A934F33B26627B512932DD1C9640F62D1A2453AED3AE76AAF76
+    8F9170E7CE1D1DE8FAF5EB49CBF2E5CB758A74FF50A7001ADF6AF7428DA6A902
+    C499D29F99762D8DD47EE9D2A5FC4762B1112C5DBA3496521924956E00F44245
+    6BCA9429C57DD0E261EDDAB5BA075069D72AA2E2361ABF28BAAB57AFD6C53D69
+    D7523B2CD5BBC5734BCB1B6D3077EEDCFC325D3DD40D4FD25E71E12703D549BD
+    2BFDB4C2A97888B8E789D3F2E4C993A45D855FDE96CA979A9A0254EBA4EC4D77
+    72D5AA55F9CFCA8D3893EAE499336792F68B172FC671EB172090B7F55CED8797
+    E609A042A2F5894625D3AEB9A27AA36B71F1C7357155AE34D899762DE29339AA
+    77753F57BC1F1D4EA3A555AF8EA8939E772019BF5279C196BC0E7B634D1CB7F5
+    0547D12D8436D021BE7EFD5A1ABA1F387FFEBC5EEB0640133416BB9A221A752D
+    ABF27B4877B2A203AA1AA74F9F8ED58E4E6C3C42D0FD745C0CF55AB719C59D54
+    1FB481BE637432AE7B712CDD4DE964C6854B9D549F0F1D3A54B193BAC9894EAA
+    33A5F2633D0D53D4B27A04289547245E683156AD0E368EE609A051D7B9CEB76F
+    D8B0212A564DB4A250BD49B768E454C85587B466D54A40454BD548F326F344A2
+    1AAAF4E9154EA0F15BB16245EC30AAA376287B1796518952BB2647B4173CC055
+    572F5CB890FC75DEBC79D2A6542EAEE919AF8B4CB1FCBAE68C1933A6F88BE804
+    EA24E885EEAFB4C4CA74B2E2E3B540FA859681AEA551837512D2335E3BD73015
+    744097882843FAB84644654E1DD07D943AA00F56BBD2E6D1C9C997C886D22401
+    74A1D7C0E4DBB552D4B92E78BC9346252D738FAB89BEA98CD4D24C9A346992CE
+    BE0A499D8F933541F3CFDD62871A36EDB0ADAD4D43A8E1D71C4ADAF55DE2F9A0
+    5EA46F3D33E886441D4EFEAA657A14574DE8F45D90C4D05C29E8A42AA20A70F1
+    17D1D22596523A994927630DA36F915E9D6748B40CF47DA390EB53E947AB1243
+    15A1A0032AF372A954BE36C689D249531D5107F467B5270D79F44DA3034DA319
+    02683CF4C59EA588F658496B1598694FD0325783170FFBB4990A617A4AE5E9EC
+    EC540929D840F7AF9A6DF1EB92E6B4EEB02B2EC113B66FDF5E71F21D3D7AB4E6
+    F25A954C37303A8A5605BA76A940C62DAF4AB23EAB05B45EF7F4F4E875A6426B
+    BDA469149DD415463BC92FC17566B4F6D3424BEB87F85D426BA1CC36DDDDDD35
+    3BA969AD9310675E1DD3552B7E498CDF40E2D6426542AF33A3A3B7F4D9F8094C
+    B7B0BA54E69F61C4E3A9E23BF8F6F676AD944AE58BB976288B8A7FFB1B761A2E
+    409C8560E41031E4F9F64C41EDEDED8D32A6B734118B8B50A93C5F8B7F07D07C
+    D2852839AEAA54F16FA53A62FE7700A12A55736E69DE6BE2C6815459D3655815
+    21DA75C792FF694FF3496BADF45D727E4E5CBE7C39FD2B55575757BE03F1FB40
+    71274BE5621F3BD137BD76ED5AD21E8F7A852EAAE96552A0599BEEA47612F338
+    4D3D022447111D1D1DC53F1A34825FE0DF02698ED67C121768CED5F34B8A2AB1
+    EA599DBFB9A41F0EA6A973D9363838383030906F57C14B7E18AE88BE72CD4EF6
+    F7F7F7F5F5C515F2EF74529DA9D849AD30EBE964C5CFD6DF019D220D71DC8837
+    9F5F400080C68100600D0280350800D62000588300600D0280350800D6200058
+    8300600D0280350800D62000588300600D0280350800D62000588300600D0280
+    350800D62000588300600D0280350800D62000588300600D0280350800D6FC09
+    FF84C2C0DAE1DB170000000049454E44AE426082
+  }
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '1.6.0.4'
+  object GBSemesterzeiten: TGroupBox
+    Left = 9
+    Height = 81
+    Top = 8
+    Width = 347
+    Caption = 'Semesterzeiten'
+    ClientHeight = 61
+    ClientWidth = 343
+    TabOrder = 0
+    OnClick = GBSemesterzeitenClick
+    object DTVeranstaltungsbeginn: TDateTimePicker
+      Left = 24
+      Height = 23
+      Top = 24
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 0
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = BtnBerechnenClick
+    end
+    object Label1: TLabel
+      Left = 27
+      Height = 15
+      Top = 3
+      Width = 117
+      Caption = '&Veranstaltungsbeginn:'
+      FocusControl = DTVeranstaltungsbeginn
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 173
+      Height = 15
+      Top = 1
+      Width = 106
+      Caption = 'Veranstaltungsende:'
+      ParentColor = False
+    end
+    object DTVeranstaltungsende: TDateTimePicker
+      Left = 170
+      Height = 23
+      Top = 22
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 1
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = BtnBerechnenClick
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 9
+    Height = 81
+    Top = 125
+    Width = 347
+    Caption = 'Veranstaltungsfrei'
+    ClientHeight = 61
+    ClientWidth = 343
+    TabOrder = 1
+    OnClick = GBSemesterzeitenClick
+    object DateTimePicker1: TDateTimePicker
+      Left = 24
+      Height = 23
+      Top = 24
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 0
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = DateTimePicker1Change
+    end
+    object Label3: TLabel
+      Left = 27
+      Height = 15
+      Top = 3
+      Width = 20
+      Caption = '&von'
+      FocusControl = DateTimePicker1
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 173
+      Height = 15
+      Top = 1
+      Width = 15
+      Caption = 'bis'
+      ParentColor = False
+      OnClick = Label2Click
+    end
+    object DateTimePicker2: TDateTimePicker
+      Left = 170
+      Height = 23
+      Top = 22
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 1
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = DateTimePicker1Change
+    end
+    object Label10: TLabel
+      Left = 87
+      Height = 15
+      Top = 46
+      Width = 107
+      Caption = 'Ungültiger Zeitraum'
+      Font.Color = clRed
+      ParentColor = False
+      ParentFont = False
+      Visible = False
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 9
+    Height = 81
+    Top = 253
+    Width = 347
+    Caption = 'Zusätzlich frei'
+    ClientHeight = 61
+    ClientWidth = 343
+    TabOrder = 2
+    OnClick = GBSemesterzeitenClick
+    object DateTimePicker3: TDateTimePicker
+      Left = 24
+      Height = 23
+      Top = 24
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 0
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = DateTimePicker3Change
+    end
+    object Label5: TLabel
+      Left = 27
+      Height = 15
+      Top = 3
+      Width = 20
+      Caption = 'v&on'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 173
+      Height = 15
+      Top = 1
+      Width = 15
+      Caption = 'bis'
+      ParentColor = False
+      OnClick = Label2Click
+    end
+    object DateTimePicker4: TDateTimePicker
+      Left = 170
+      Height = 23
+      Top = 22
+      Width = 79
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 1
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 42846
+      Time = 0.642828969910624
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = DateTimePicker3Change
+    end
+    object Label13: TLabel
+      Left = 87
+      Height = 15
+      Top = 46
+      Width = 107
+      Caption = 'Ungültiger Zeitraum'
+      Font.Color = clRed
+      ParentColor = False
+      ParentFont = False
+      Visible = False
+    end
+  end
+  object CheckBox1: TCheckBox
+    Left = 16
+    Height = 19
+    Top = 103
+    Width = 231
+    Caption = 'Veranstaltungs&freie Zeit berücksichtigen'
+    OnChange = CheckBox1Change
+    OnClick = CheckBox1Click
+    TabOrder = 3
+  end
+  object CheckBox2: TCheckBox
+    Left = 21
+    Height = 19
+    Top = 225
+    Width = 292
+    Caption = '&Zusätzliche veranstaltungsfreie Zeit berücksichtigen'
+    OnChange = CheckBox1Change
+    OnClick = CheckBox1Click
+    TabOrder = 4
+  end
+  object Memo1: TMemo
+    Left = 16
+    Height = 168
+    Top = 336
+    Width = 528
+    Lines.Strings = (
+      'Memo1'
+    )
+    ReadOnly = True
+    TabOrder = 5
+    TabStop = False
+    WantTabs = True
+  end
+  object ComboBox1: TComboBox
+    Left = 371
+    Height = 23
+    Top = 48
+    Width = 52
+    ItemHeight = 15
+    Items.Strings = (
+      '--'
+      'Mo'
+      'Di'
+      'Mi'
+      'Do'
+      'Fr'
+      'Sa'
+      'So'
+    )
+    OnChange = ComboBox1Change
+    TabOrder = 6
+    Text = 'ComboBox1'
+  end
+  object Label11: TLabel
+    Left = 371
+    Height = 15
+    Top = 25
+    Width = 49
+    Caption = '1. &Termin'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object ComboBox2: TComboBox
+    Left = 450
+    Height = 23
+    Top = 48
+    Width = 52
+    ItemHeight = 15
+    Items.Strings = (
+      '--'
+      'Mo'
+      'Di'
+      'Mi'
+      'Do'
+      'Fr'
+      'Sa'
+      'So'
+    )
+    OnChange = ComboBox1Change
+    TabOrder = 7
+    Text = 'ComboBox2'
+  end
+  object Label12: TLabel
+    Left = 450
+    Height = 15
+    Top = 25
+    Width = 49
+    Caption = '2. Ter&min'
+    FocusControl = ComboBox2
+    ParentColor = False
+  end
+  object BtnBerechnen: TButton
+    Left = 375
+    Height = 25
+    Top = 137
+    Width = 90
+    Caption = '&Berechnen'
+    OnClick = BtnBerechnenClick
+    TabOrder = 8
+  end
+  object Button2: TButton
+    Left = 375
+    Height = 25
+    Top = 178
+    Width = 90
+    Caption = 'Sch&ließen'
+    OnClick = Button2Click
+    TabOrder = 9
+  end
+  object Label9: TLabel
+    Left = 371
+    Height = 30
+    Top = 77
+    Width = 133
+    Caption = 'Der zweite Wochentag ist'#13#10'kleiner als der erste.'
+    Font.Color = clRed
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+end

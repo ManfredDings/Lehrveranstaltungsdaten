@@ -1,0 +1,250 @@
+unit kalender;{enthält Routinen zu Osterdatum und Feiertagen}
+//©2001 by Manfred Dings, manfreddings@virtualskysoft.de
+
+interface
+
+uses sysutils;
+
+procedure Osterdatum(var tag, monat, Jahr:integer);
+function Schalttag(Jahr:integer):byte;
+function Wochentag(Tageszahl:double):byte;{gibt für Sonntag=1, Montag=2 ... Samstag=7}
+(*function Feiertagsname(tag,monat,jahr:integer):string;{gibt zu Datum den Namen eines ARBEEITSFREIEN Feiertages oder
+                              Leer, wenn kein Feiertag}
+  *)
+Function Feiertagsname(tag,monat,jahr:integer;var Kuerzel:string):string;{gibt zu Datum den Namen eines ARBEEITSFREIEN Feiertages oder
+                              Leer, wenn kein Feiertag}
+
+Function IsFeiertag(adate:TDate):boolean;
+function JD(const DAY,MONTH,YEAR:INTEGER;const HOUR:double):double; {Julianisches Datum}
+Function MJD(DAY,MONTH,YEAR:INTEGER;const HOUR:double):double;{MJD: Modifiziertes Julianisches Datum}
+
+implementation
+
+uses DateUtils;
+
+FUNCTION MJD(DAY,MONTH,YEAR:INTEGER;const HOUR:double):double;
+  VAR A: double; B: INTEGER;
+  begin
+    A:=10000.0*YEAR+100.0*MONTH+DAY;
+    IF (MONTH<=2) THEN BEGIN MONTH:=MONTH+12; YEAR:=YEAR-1 END;
+    IF (A<=15821004.1)
+      THEN B:=-2+TRUNC((YEAR+4716)/4)-1179
+      ELSE B:=TRUNC(YEAR/400)-TRUNC(YEAR/100)+TRUNC(YEAR/4);
+    A:=365.0*YEAR-679004.0;
+    result:=A+B+TRUNC(30.6001*(MONTH+1))+DAY+HOUR/24.0;
+  end;{function MJD}
+
+
+
+function JD(const DAY,MONTH,YEAR:INTEGER;const HOUR:double):double; {Julianisches Datum}
+  begin
+    JD:=MJD(DAY,MONTH,YEAR,HOUR)+2400000.5;
+  end;{function JD}
+
+
+
+
+(*const jdoffset=2400000.5;
+
+function mjd(day,month,year:integer;const hour:double):double;
+  var a: double; b: integer;
+  begin
+    a:=10000.0*year+100.0*month+day;
+    if (month<=2) then
+    begin
+      month:=month+12; year:=year-1
+    end;
+    if (A<=15821004.1)
+      then b:=-2+trunc((year+4716)/4)-1179
+      else b:=trunc(year/400)-trunc(year/100)+trunc(year/4);
+    a:=365.0*year-679004.0;
+    result:=a+b+trunc(30.6001*(month+1))+day+hour/24.0;
+  end;{function MJD}
+
+function JD(const day,month,year:integer;const hour:double):double; {Julianisches Datum}
+  begin
+    JD:=mjd(day,month,year,hour)+jdoffset
+  end;{function JD}
+
+  *)
+function Wochentag;
+var x:byte;
+begin
+  x:= trunc((Tageszahl-4)) mod 7;
+  if x=0 then result:=7 else result:=x;
+end;{Wochentag}
+
+(*procedure Osterdatum(var Tag,Monat,Jahr:integer) {Berechnung Osterdatum};
+var x, a, b, c, d, e, f, g, h, i, K, L, M, y, month, P, day:integer;
+begin
+    x := Jahr;
+    a := x Mod 19;
+    b := x div 100;
+    c := x Mod 100;
+    d := b div 4;
+    e := b Mod 4;
+    f := (b + 8) div 25;
+    g := (b - f + 1) div 3;
+    h := (19 * a + b - d - g + 15) Mod 30;
+    K := c Mod 4;
+    i := c div 4;
+    L := (32 + 2 * e + 2 * i - h - K) Mod 7;
+    M := (a + 11 * h + 22 * L) div 451;
+    y := h + L - 7 * M + 114;
+    month := y div 31;
+    P := y Mod 31;
+    day := P + 1;
+    Monat:=month;
+    Tag:=day;
+    Jahr:=x;
+end;{Osterdatum}*)
+
+procedure Osterdatum(var Tag,Monat,Jahr:integer) {Berechnung Osterdatum};
+var x, a, b, c, d, e, f, g, h, i, K, L, M, y, month, P, day:integer;
+begin
+  x := Jahr;
+  if jahr >= 1583 then
+  begin
+    a := x Mod 19;
+    b := x div 100;
+    c := x Mod 100;
+    d := b div 4;
+    e := b Mod 4;
+    f := (b + 8) div 25;
+    g := (b - f + 1) div 3;
+    h := (19 * a + b - d - g + 15) Mod 30;
+    K := c Mod 4;
+    i := c div 4;
+    L := (32 + 2 * e + 2 * i - h - K) Mod 7;
+    M := (a + 11 * h + 22 * L) div 451;
+    y := h + L - 7 * M + 114;
+    month := y div 31;
+    P := y Mod 31;
+    day := P + 1;
+    Monat:=month;
+    Tag:=day;
+    Jahr:=x
+  end
+  else
+  begin
+    a := x Mod 4;
+    b := x Mod 7;
+    c := x Mod 19;
+    d := (19*c+15) Mod 30;
+    e := (2*a+4*b-d+34) Mod 7;
+    y := d+e+114;
+    f := y div 31;
+    g := y Mod 31;
+    Monat:=f;
+    Tag:=g+1;
+    Jahr:=x
+  end;
+end;{Osterdatum}
+
+
+Function Schalttag(Jahr:integer):byte;{Berechnet, ob es in Jahr einen Schalttag gibt}
+begin
+    Schalttag:= 0;
+    if (Jahr Mod 400) = 0 then Schalttag:= 1
+    else
+    if (Jahr Mod 100) = 0 then Schalttag:= 0
+    else
+    if (Jahr Mod 4) = 0 then Schalttag:= 1;
+end; {Funktion Schalttag}
+
+
+(*Function Feiertagsname(tag,monat,jahr:integer):string;{gibt zu Datum den Namen eines ARBEEITSFREIEN Feiertages oder
+                              Leer, wenn kein Feiertag}
+    var day, month, year:integer;
+        datum,ostern1, advent1, heiligabend:double;
+begin
+    datum:=jd(tag,monat,jahr,0);
+    Feiertagsname:= '';
+    day := Tag;
+    month := Monat;
+    year := Jahr;
+    Osterdatum(tag,monat,jahr);
+    ostern1:=JD(tag,monat,Jahr,0);
+    heiligabend := JD(24,12,year,0);
+    advent1 := heiligabend - Wochentag(heiligabend) - 21;
+    {feste Feiertage}
+    if (month = 1) and (day = 1) then Feiertagsname := 'Neujahr' else
+    if (month = 5) and (day = 1) then Feiertagsname := 'Tag der Arbeit' else
+    if (month = 8) and (day = 15) then Feiertagsname := 'Mariä Himmelfahrt' else
+    if (month = 6) and (day = 17) and (year>1953)and (year<1990) then Feiertagsname := 'Tag der deutschen Einheit' else
+    if (month = 10) and (day = 3) and (year>1989) then Feiertagsname := 'Tag der deutschen Einheit' else
+    if (month = 11) and (day = 1) then Feiertagsname := 'Allerheiligen' else
+    if (month = 12) and (day = 25) then Feiertagsname := '1. Weihnachtstag' else
+    if (month = 12)and (day = 26) then Feiertagsname := '2. Weihnachtstag' else
+    if (month = 12)and (day = 31) then Feiertagsname := 'Silvester' else
+    {Bewegliche Feiertage nach Osterdatum}
+    if (datum = (ostern1-48)) then feiertagsname:='Rosenmontag';
+    if (datum = (ostern1-46)) then feiertagsname:='Aschermittwoch';
+    if (datum = (ostern1)) then Feiertagsname := 'Ostern' else
+    if (datum = (ostern1 + 1)) then Feiertagsname := 'Ostermontag' else
+    if (datum = (ostern1 - 2)) then Feiertagsname := 'Karfreitag' else
+    if (datum = (ostern1 + 39)) then Feiertagsname := 'Himmelfahrt' else
+    if (datum = (ostern1 + 49)) then Feiertagsname := 'Pfingstsonntag' else
+    if (datum = (ostern1 + 50)) then Feiertagsname := 'Pfingstmontag' else
+    if (datum = (ostern1 + 60)) then Feiertagsname := 'Fronleichnam';
+    if datum=(advent1+1) then Feiertagsname:='1. Advent' else
+{    'Bewegliche Feiertage nach 1. Advent}
+//Bußtag vor/nach 1995 ggf. aus/einkommentieren
+    if ((datum = (advent1 - 10)){ and (year < 1995)}) then Feiertagsname := 'Bußtag'
+end;{Funktion Feiertagsname}
+  *)
+
+Function Feiertagsname(tag,monat,jahr:integer; var Kuerzel:String):string;{gibt zu Datum den Namen eines ARBEEITSFREIEN Feiertages oder
+                              Leer, wenn kein Feiertag}
+    var day, month, year:integer;
+        datum,ostern1, advent1, heiligabend:double;
+begin
+    datum:=jd(tag,monat,jahr,0);
+    Feiertagsname:= '';
+    day := Tag;
+    month := Monat;
+    year := Jahr;
+    Osterdatum(tag,monat,jahr);
+    ostern1:=JD(tag,monat,Jahr,0);
+    heiligabend := JD(24,12,year,0);
+    advent1 := heiligabend - Wochentag(heiligabend) - 21;
+    {feste Feiertage}
+    if (month = 1) and (day = 1) then
+    begin
+      Feiertagsname := 'Neujahr';kuerzel:='Neuj'
+    end
+    else
+    if (month = 5) and (day = 1) then
+    begin Feiertagsname := 'Tag der Arbeit';kuerzel:='TdAr' end else
+    if (month = 8) and (day = 15) then begin Feiertagsname := 'Mariä Himmelfahrt' ;kuerzel:='MaHi' end else
+    if (month = 6) and (day = 17) and (year>1953)and (year<1990) then begin Feiertagsname := 'Tag der deutschen Einheit' ;kuerzel:='TdEi'end else
+    if (month = 10) and (day = 3) and (year>1989) then begin feiertagsname := 'Tag der deutschen Einheit' ;kuerzel:='TdEi'end else
+    if (month = 11) and (day = 1) then begin feiertagsname := 'Allerheiligen' ;kuerzel:='Alh'end else
+    if (month = 12) and (day = 25) then begin feiertagsname := '1. Weihnachtstag' ;kuerzel:='1.We'end else
+    if (month = 12)and (day = 26) then begin feiertagsname := '2. Weihnachtstag' ;kuerzel:='2.We'end else
+    if (month = 12)and (day = 31) then begin feiertagsname := 'Silvester' ;kuerzel:='Silv'end else
+    {Bewegliche Feiertage nach Osterdatum}
+    if (datum = (ostern1-48)) then begin feiertagsname:='Rosenmontag';kuerzel:='RosM' end else
+    if (datum = (ostern1-46)) then begin feiertagsname:='Aschermittwoch' ;kuerzel:='Asch'end else
+    if (datum = (ostern1)) then begin feiertagsname := 'Ostern' ;kuerzel:='OsSo'end else
+    if (datum = (ostern1 + 1)) then begin feiertagsname := 'Ostermontag';kuerzel:='OsMo' end else
+    if (datum = (ostern1 - 2)) then begin feiertagsname := 'Karfreitag' ;kuerzel:='Karf'end else
+    if (datum = (ostern1 + 39)) then begin feiertagsname := 'Himmelfahrt';kuerzel:='Himf' end else
+    if (datum = (ostern1 + 49)) then begin feiertagsname := 'Pfingstsonntag' ;kuerzel:='PfSo'end else
+    if (datum = (ostern1 + 50)) then begin feiertagsname := 'Pfingstmontag';kuerzel:='PfMo' end else
+    if (datum = (ostern1 + 60)) then begin feiertagsname := 'Fronleichnam' ;kuerzel:='Fron'end else
+    if datum=(advent1+1) then begin feiertagsname:='1. Advent' ;kuerzel:='1.Ad' end else
+{    'Bewegliche Feiertage nach 1. Advent}
+//Bußtag vor/nach 1995 ggf. aus/einkommentieren
+//    if ((datum = (advent1 - 10)){ and (year < 1995)}) then begin Feiertagsname := 'Bußtag';kuerzel:='Bußt' end
+end;{Funktion Feiertagsname}
+
+Function IsFeiertag(adate:TDate):boolean;
+var Kuerzel:String;
+begin
+  result:=Feiertagsname(dayOf(adate),monthOf(adate),yearOf(adate),Kuerzel)<>''
+end;
+
+BEGIN
+{Unit kalender}
+END.
